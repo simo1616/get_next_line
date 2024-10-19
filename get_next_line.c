@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:20:48 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/10/18 12:46:44 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/10/19 09:55:43 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ static char	*read_file(int fd, char *buffer)
 	temp_buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!temp_buffer)
 		return (NULL);
-	while (!ft_strchr(buffer, '\n'))
+	ret = 1;
+	while (!ft_strchr(buffer, '\n') && ret != 0)
 	{
 		ret = read_and_join(fd, &buffer, temp_buffer);
 		if (ret == -1)
@@ -102,6 +103,7 @@ static char	*read_file(int fd, char *buffer)
 			free(temp_buffer);
 			return (NULL);
 		}
+		temp_buffer[ret] = '\0';
 		if (ret == 0)
 			break ;
 	}
