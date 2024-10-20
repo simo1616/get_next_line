@@ -12,101 +12,32 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+int	init_output(char **out)
 {
-	size_t	i;
-
-	if (!s)
+	*out = (char *)malloc(sizeof(char) * 1);
+	if (!*out)
 		return (0);
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
+	(*out)[0] = '\0';
+	return (1);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+ssize_t	find_char(char *buf, ssize_t x)
 {
-	void			*ptr;
-	size_t			total;
-	size_t			i;
-	unsigned char	*tmp;
-
-	total = count * size;
-	ptr = malloc(total);
-	if (!ptr)
-		return (NULL);
-	tmp = (unsigned char *)ptr;
-	i = 0;
-	while (i < total)
-		tmp[i++] = 0;
-	return (ptr);
+	while (buf[x])
+	{
+		if (buf[x] == '\n')
+			return (x + 1);
+		x++;
+	}
+	return (0);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+ssize_t	ft_strlen(const char *s)
 {
-	char	*result;
-	size_t	len1;
-	size_t	len2;
-	size_t	i;
-	size_t	j;
+	ssize_t	len;
 
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	result = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!result)
-		return (NULL);
-	i = 0;
-	while (s1 && s1[i])
-	{
-		result[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2 && s2[j])
-	{
-		result[i + j] = s2[j];
-		j++;
-	}
-	result[i + j] = '\0';
-	return (result);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i;
-	char	ch;
-
-	i = 0;
-	ch = (char)c;
-	while (s && s[i])
-	{
-		if (s[i] == ch)
-			return ((char *)&s[i]);
-		i++;
-	}
-	if (ch == '\0' && s)
-		return ((char *)&s[i]);
-	return (NULL);
-}
-
-char	*ft_strdup(const char *s)
-{
-	size_t	len;
-	char	*dup;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	len = ft_strlen(s);
-	dup = (char *)malloc(sizeof(char) * (len + 1));
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }

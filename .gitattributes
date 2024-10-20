@@ -1,0 +1,22 @@
+# Forcer les fins de ligne LF pour tous les fichiers texte
+* text eol=lf
+
+# Spécifier des règles spécifiques pour certains types de fichiers
+
+# Ne pas convertir les fins de ligne pour les fichiers binaires
+*.png binary
+*.jpg binary
+*.gif binary
+*.pdf binary
+
+# Forcer LF pour les fichiers spécifiques au code source (C, C++, etc.)
+*.c text eol=lf
+*.h text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.md text eol=lf
+
+# Ne pas forcer les fins de ligne sur les fichiers Makefile et autres fichiers spécifiques
+Makefile text eol=lf
